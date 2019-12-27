@@ -193,8 +193,8 @@ module.exports = function(grunt) {
 
     // Build task(s).
 	grunt.registerTask('build', ['clean:last',
-		//'wiredep:dist',
-        'ngtemplates', 'dependence', 'ngAnnotate', 'concat', 'uglify', 'less', 'cssmin', 'copy', 'clean:clstmp']);
+		//'wiredep:dist',  'ngAnnotate', 
+        'dependence', 'concat', 'uglify', 'less', 'cssmin', 'copy', 'clean:clstmp']);
 
 	grunt.registerTask('dev', ['clean:last',
         //'wiredep:dev',
