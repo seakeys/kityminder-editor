@@ -48,6 +48,7 @@
     "uglify-js": "^2.8.29"
   },
   "dependencies": {
+    "hotbox-ui": "^1.0.0",
     "kityminder-core": "^1.4.50"
   },
   "config": {
