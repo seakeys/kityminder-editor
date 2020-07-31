@@ -112,7 +112,7 @@ define(function(require, exports, module) {
          // edit for the selected node
         function editText() {
             var node = minder.getSelectedNode();
-            if (!node) {
+            if (!node || (node.type === 'root' && node.getText() === '默认主题')) {
                 return;
             }
             var textContainer = receiverElement;
@@ -133,6 +133,7 @@ define(function(require, exports, module) {
                 receiver.fixFFCaretDisappeared();
             };
             fsm.jump('input', 'input-request');
+            minder.fire("inputstatus");
             receiver.selectAll();
         }
 
@@ -195,7 +196,7 @@ define(function(require, exports, module) {
                          *     |123abc| -> 此时123为一个TextNode为[#Text 123, #Text abc]，但是对这两个任意取值wholeText均为全部内容123abc
                          * 上述BUG仅存在在FF中，故将wholeText更改为textContent
                          */
-                        str = str.textContent.replace("&nbsp;", " ");
+                        str = str.textContent.replace("&nbsp;", "&nbsp;");
 
                         if (!STR_CHECK.test(str)) {
                             space_l = str.length;
@@ -381,7 +382,7 @@ define(function(require, exports, module) {
 
             if (!planed.timer) {
                 planed.timer = setTimeout(function() {
-                    var box = focusNode.getRenderBox('TextRenderer');
+                    var box = focusNode.getRenderBox("TextRenderer", 0, 1); 
                     receiverElement.style.left = Math.round(box.x) + 'px';
                     receiverElement.style.top = (debug.flaged ? Math.round(box.bottom + 30) : Math.round(box.y)) + 'px';
                     //receiverElement.focus();
