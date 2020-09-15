@@ -38,6 +38,7 @@ define(function(require, exports, module) {
 
             // when exited, commit or exit depends on the exit reason
             fsm.when('input -> *', function(exit, enter, reason) {
+                console.log(reason)
                 switch (reason) {
                     case 'input-cancel':
                         return exitInputMode();
@@ -311,8 +312,9 @@ define(function(require, exports, module) {
             try {
                 minder.decodeData('text', text).then(function(json) {
                     function importText(node, json, minder) {
-                        var data = json.data;
-
+                        var data = { data: { text: '' } }
+                        if (json) data = json.data;
+                        if(!json) json = { data: { text: '' } }
                         node.setText(data.text || '');
 
                         var childrenTreeData = json.children || [];
