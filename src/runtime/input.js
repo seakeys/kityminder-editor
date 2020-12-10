@@ -113,7 +113,7 @@ define(function(require, exports, module) {
          // edit for the selected node
         function editText() {
             var node = minder.getSelectedNode();
-            if (!node || (node.type === 'root' && node.getText() === '默认主题')) {
+            if (!node || (node.type === 'root' && (node.getText() === '默认主题' || node.getText() === 'Default Title'))) {
                 return;
             }
             var textContainer = receiverElement;
